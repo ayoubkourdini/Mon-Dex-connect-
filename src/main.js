@@ -1,7 +1,11 @@
 import { getCreatures } from "./services/api.js";
+import { affichage } from "./ui.js";
 
-async function test() {
-    const list = await getCreatures(0);
-    console.log(list);
+let allCreatures = [];
+
+async function loadCreatures() {
+    allCreatures = await getCreatures(0);
+    affichage(allCreatures)
 }
-test();
+loadCreatures()
+

@@ -30,5 +30,19 @@ export async function getCreatures(offset) {
     const list = await getCreatureList(offset);
     const requests = list.map(creature => getCreatureDetails(creature.url))
     const details = await Promise.all(requests);
-    return details;
+    const creatures = details.map(creature => toCreature(creature)) 
+    return creatures;
+}
+
+function toCreature(data) {
+    return {
+        id: data.id,
+        name: data.name,
+        type: data.types[0].type.name,
+        image: data.sprites.front_default, 
+        stats: data.stats.map(stat => ({
+            name: stat.stat.name,
+            value: stat.base_stat
+        }))
+    }
 }
