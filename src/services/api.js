@@ -46,3 +46,17 @@ function toCreature(data) {
         }))
     }
 }
+
+export async function searchCreature (name) {
+    try {
+        const response = await fetch(`${BASE_URL}/pokemon/${name}`);
+        if (!response.ok) {
+            throw new Error(`Erreur ${response.status}`);
+        }
+        const data = await response.json();
+        return toCreature(data);
+    }
+    catch (error) {
+        throw error;
+    }
+}

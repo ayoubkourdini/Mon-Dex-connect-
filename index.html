@@ -43,10 +43,13 @@
     <section aria-label="Recherche et filtres" class="flex flex-col gap-4">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h1 class="font-display text-4xl font-extrabold">Trouver une créature</h1>
-        <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
-          Rechercher par nom
-          <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal">
-        </label>
+        <form id="search-form" action="" class="flex gap-2 items-end">
+          <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
+            Rechercher par nom
+          <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal"></label>
+          <button id="search-btn" type="submit">Rechercher</button>
+          <button id="clear-btn" type="button">Effacer</button>
+        </form>
       </div>
       <div id="filters" role="group" aria-label="Filtrer par type"
         class="flex flex-nowrap gap-2 lg:overflow-hidden overflow-x-auto">

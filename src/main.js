@@ -1,10 +1,14 @@
-import { getCreatures } from "./services/api.js";
+import { getCreatures, searchCreature } from "./services/api.js";
 import { affichage } from "./ui.js";
 
 let allCreatures = [];
 let offset = 20;
 let currentType = "all";
 const button = document.getElementById("chargeBtn");
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("search");
+const searchBtn = document.getElementById("search-btn");
+const clearBtn = document.getElementById("clear-btn");
 
 async function loadCreatures() {
     allCreatures = await getCreatures(0);
@@ -35,4 +39,23 @@ filterButtons.forEach(filterBtn => {
         applyFilter() 
     })
 })
+
+async function handleSearch (event){
+    event.preventDefault();
+    const query = searchInput.value.toLowerCase().trim()
+    if (query === "") {
+        return
+    }
+    const found = await searchCreature(query);
+    affichage([found])
+}
+
+function handleClear (){
+    searchInput.value = "";
+    applyFilter()
+}
+
+searchForm.addEventListener("submit", handleSearch);
+clearBtn.addEventListener("click", handleClear)
+
 
