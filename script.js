@@ -60,39 +60,7 @@
 // -------------------------------------------------------------
 // BONUS : LocalStorage, Fetch API, tri, comparaison
 // -------------------------------------------------------------
-const grid = document.getElementById("grid");
-const panneau = document.getElementById("panneau");
-const search = document.getElementById("search");
-const form = document.getElementById("creature-form");
-const teamSlots = document.getElementById("team-slots")
-const teamCount = document.getElementById("team-count")
-const teamCountNav = document.getElementById("team-count-nav");
-let creatureOuverte;
 
-let texteActuel = "";
-let typeActuel = "Tous";
-let equipe = [];
-
-function affichage(liste) {
-  grid.innerHTML = "";
-
-  for (let i = 0; i < liste.length; i++) {
-    const c = liste[i];
-    const card = `
-  <article data-id="${c.id}" class="flex flex-col cursor-pointer gap-3 rounded-card bg-white p-3 pb-4">
-    <img src="${c.image}" alt="${c.name}" class="h-28 w-28 mx-auto">
-    <h3 class="font-display text-xl font-semibold">${c.name}</h3>
-    <p class="text-sm text-muted">Type: ${c.type}</p>
-    <p class="text-sm text-muted">HP: ${c.stats.hp}</p>
-    <button type="button" data-id="${c.id}" data-action="add" class="btn-outline">Ajouter à l'équipe</button>
-  </article>
-`;
-    grid.innerHTML += card;
-  }
-  monEquipe();
-  document.getElementById("creature-count").textContent = creatures.length;
-}
-affichage(creatures)
 
 function detail(c) {
  creatureOuverte = c;

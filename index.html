@@ -50,13 +50,13 @@
       </div>
       <div id="filters" role="group" aria-label="Filtrer par type"
         class="flex flex-nowrap gap-2 lg:overflow-hidden overflow-x-auto">
-        <button type="button" class="chip bg-ink text-white border-ink shrink-0">Tous</button>
-        <button type="button" class="chip shrink-0" id="typeFeu">Feu</button>
-        <button type="button" class="chip shrink-0">Eau</button>
-        <button type="button" class="chip shrink-0">Plante</button>
-        <button type="button" class="chip shrink-0">Électrik</button>
-        <button type="button" class="chip shrink-0">Glace</button>
-        <button type="button" class="chip shrink-0">Ténèbres</button>
+        <button type="button" class="chip shrink-0" data-type="all">Tous</button>
+        <button type="button" class="chip shrink-0" id="typeFeu" data-type="fire">Feu</button>
+        <button type="button" class="chip shrink-0" data-type="water">Eau</button>
+        <button type="button" class="chip shrink-0" data-type="grass">Plante</button>
+        <button type="button" class="chip shrink-0" data-type="electric">Électrik</button>
+        <button type="button" class="chip shrink-0" data-type="ice">Glace</button>
+        <button type="button" class="chip shrink-0" data-type="dark">Ténèbres</button>
       </div>
     </section>
 
@@ -131,6 +131,7 @@
         </section>
       </aside>
     </div>
+    <button id="chargeBtn">Charger plus</button>
     <!-- ===================== FORMULAIRE DE CRÉATION ===================== -->
     <section id="create" aria-label="Nouvelle créature" class="flex flex-col gap-6 rounded-card bg-white p-8">
       <div>
@@ -202,9 +203,8 @@
     Images : PokeAPI (official artwork). Projet de fans réalisé dans le cadre d'une formation.
   </footer>
 
-  <!-- data.js (à créer) doit être chargé AVANT script.js -->
-  <script src="./data.js"></script>
-  <script src="./script.js"></script>
+
+  <script type="module" src="src/main.js"></script>
 </body>
 
 </html>
