@@ -869,11 +869,6 @@ video {
   background-color: rgb(237 239 243 / var(--tw-bg-opacity, 1));
 }
 
-.bg-ink {
-  --tw-bg-opacity: 1;
-  background-color: rgb(20 23 29 / var(--tw-bg-opacity, 1));
-}
-
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
@@ -1096,6 +1091,14 @@ video {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
 }
 
 @media (min-width: 768px) {

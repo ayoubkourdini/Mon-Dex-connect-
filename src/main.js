@@ -51,8 +51,15 @@ async function handleSearch (event){
     if (query === "") {
         return
     }
-    const found = await searchCreature(query);
-    affichage([found])
+    searchBtn.disabled = true
+    try {
+        const found = await searchCreature(query);
+        affichage([found])
+    } catch (error) {
+        console.error(error)
+    } finally {
+        searchBtn.disabled = false
+    }
 }
 
 function handleClear (){

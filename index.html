@@ -43,12 +43,15 @@
     <section aria-label="Recherche et filtres" class="flex flex-col gap-4">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h1 class="font-display text-4xl font-extrabold">Trouver une créature</h1>
-        <form id="search-form" action="" class="flex gap-2 items-end">
-          <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
+        <form id="search-form" action="" class="flex w-full max-w-md flex-col gap-2 items-end">
+          <label class="flex flex-col gap-1 text-sm font-bold">
             Rechercher par nom
-          <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal"></label>
-          <button id="search-btn" type="submit">Rechercher</button>
-          <button id="clear-btn" type="button">Effacer</button>
+          <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal">
+        </label>
+        <div class="flex gap-2">
+          <button id="search-btn" type="submit" class="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed">Rechercher</button>
+          <button id="clear-btn" type="button" class="btn-outline flex-1">Effacer</button>
+        </div>
         </form>
       </div>
       <div id="filters" role="group" aria-label="Filtrer par type"
@@ -134,7 +137,7 @@
         </section>
       </aside>
     </div>
-    <button id="chargeBtn">Charger plus</button>
+    <button id="chargeBtn" class="btn-primary mx-auto disabled:opacity-50 disabled:cursor-not-allowed">Charger plus</button>
     <!-- ===================== FORMULAIRE DE CRÉATION ===================== -->
     <section id="create" aria-label="Nouvelle créature" class="flex flex-col gap-6 rounded-card bg-white p-8">
       <div>
