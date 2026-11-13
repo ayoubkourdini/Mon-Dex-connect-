@@ -1,4 +1,6 @@
 const grid = document.getElementById("grid");
+const panel = document.getElementById("panneau");
+
 
 
 export function affichage(liste) {
@@ -15,4 +17,33 @@ export function affichage(liste) {
 `;
     grid.innerHTML += card;
   }
+}
+
+export function showDetails(c) {
+
+
+  document.getElementById("detail-id").textContent = c.id + " · Détail";
+  document.getElementById("detail-name").textContent = c.name;
+  document.getElementById("detail-type").textContent = c.type;
+  document.getElementById("detail-image").src = c.image;
+  document.getElementById("detail-image").alt = c.name;
+  document.getElementById("detail-description").textContent ="Taille: " + c.height/10 + "m, " + "Poids: " + c.weight/10 + "kg";
+
+  const noms = ["hp", "attack", "defense"];
+  for (let i = 0; i < noms.length; i++) {
+    const nom = noms[i];
+    const stat = c.stats.find((creature) => creature.name === nom  );
+    const valeur = stat.value
+    const pourcentage = Math.min((valeur / 255) * 100, 100);
+    document.getElementById("detail-" + nom + "-value").textContent = valeur;
+    document.getElementById("detail-" + nom + "-bar").style.width = pourcentage + "%";
+  }
+
+  panel.classList.remove("hidden");
+  panel.classList.add("flex");
+}
+
+export function hideDetails() {
+  panel.classList.add("hidden");
+  panel.classList.remove("flex");
 }

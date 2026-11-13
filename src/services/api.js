@@ -43,7 +43,9 @@ function toCreature(data) {
         stats: data.stats.map(stat => ({
             name: stat.stat.name,
             value: stat.base_stat
-        }))
+        })),
+        height: data.height,
+        weight: data.weight
     }
 }
 
