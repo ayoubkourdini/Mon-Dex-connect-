@@ -1,5 +1,5 @@
 import { getCreatures, searchCreature } from "./services/api.js";
-import { affichage, showDetails, hideDetails, showEmpty, showError, showLoading } from "./ui.js";
+import { affichage, showDetails, hideDetails, showEmpty, showError, showLoading, showDetailError, showDetailLoading} from "./ui.js";
 
 let allCreatures = [];
 let offset = 20;
@@ -89,9 +89,11 @@ async function handleCardClick (event) {
     if (isLoading === false && card !== null) {
         isLoading = true
         try {
+            showDetailLoading()
             const creature = await searchCreature(card.dataset.id)
             showDetails(creature)
         } catch (error) {
+            showDetailError(error.message)
             console.error(error)
         } finally {
             isLoading = false
