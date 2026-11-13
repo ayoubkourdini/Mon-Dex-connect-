@@ -1,10 +1,19 @@
-import { getCreatures } from "./services/api.js";
-import { affichage } from "./ui.js";
+import { getCreatures, searchCreature } from "./services/api.js";
+import { affichage, showDetails, hideDetails } from "./ui.js";
 
 let allCreatures = [];
 let offset = 20;
+let isLoading = false;
+
+
 let currentType = "all";
 const button = document.getElementById("chargeBtn");
+const searchForm = document.getElementById("search-form");
+const searchInput = document.getElementById("search");
+const searchBtn = document.getElementById("search-btn");
+const clearBtn = document.getElementById("clear-btn");
+const grid = document.getElementById("grid");
+const detailClose = document.getElementById("detail-close");
 
 async function loadCreatures() {
     allCreatures = await getCreatures(0);
@@ -36,3 +45,44 @@ filterButtons.forEach(filterBtn => {
     })
 })
 
+async function handleSearch (event){
+    event.preventDefault();
+    const query = searchInput.value.toLowerCase().trim()
+    if (query === "") {
+        return
+    }
+    searchBtn.disabled = true
+    try {
+        const found = await searchCreature(query);
+        affichage([found])
+    } catch (error) {
+        console.error(error)
+    } finally {
+        searchBtn.disabled = false
+    }
+}
+
+function handleClear (){
+    searchInput.value = "";
+    applyFilter()
+}
+
+searchForm.addEventListener("submit", handleSearch);
+clearBtn.addEventListener("click", handleClear)
+
+async function handleCardClick (event) {
+    const card = event.target.closest("article") 
+    if (isLoading === false && card !== null) {
+        isLoading = true
+        try {
+            const creature = await searchCreature(card.dataset.id)
+            showDetails(creature)
+        } catch (error) {
+            console.error(error)
+        } finally {
+            isLoading = false
+        }
+    }
+}
+grid.addEventListener("click", handleCardClick)
+detailClose.addEventListener("click", hideDetails)
