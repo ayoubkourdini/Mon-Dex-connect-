@@ -57,7 +57,7 @@ export function showEmpty(query) {
 }
 
 export function showError(message) {
-  grid.innerHTML = `<p class="colo-span-full">${message}</p>
+  grid.innerHTML = `<p class="col-span-full">${message}</p>
   <button id="retry-btn">Réessayer</button>`
 } 
 
