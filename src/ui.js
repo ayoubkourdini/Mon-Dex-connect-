@@ -47,3 +47,16 @@ export function hideDetails() {
   panel.classList.add("hidden");
   panel.classList.remove("flex");
 }
+
+export function showLoading() {
+  grid.innerHTML = "Chargement..."
+}
+
+export function showEmpty(query) {
+  grid.innerHTML = `Aucune créature trouvée pour ${query}.`
+}
+
+export function showError(message) {
+  grid.innerHTML = `<p class="colo-span-full">${message}</p>
+  <button id="retry-btn">Réessayer</button>`
+} 

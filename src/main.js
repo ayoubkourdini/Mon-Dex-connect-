@@ -1,9 +1,10 @@
 import { getCreatures, searchCreature } from "./services/api.js";
-import { affichage, showDetails, hideDetails } from "./ui.js";
+import { affichage, showDetails, hideDetails, showEmpty, showError, showLoading } from "./ui.js";
 
 let allCreatures = [];
 let offset = 20;
 let isLoading = false;
+let lastAction = null;
 
 
 let currentType = "all";
@@ -16,8 +17,15 @@ const grid = document.getElementById("grid");
 const detailClose = document.getElementById("detail-close");
 
 async function loadCreatures() {
-    allCreatures = await getCreatures(0);
-    applyFilter();
+    lastAction = loadCreatures;
+    showLoading();
+    try{
+        allCreatures = await getCreatures(0);
+        applyFilter();
+    } catch (error) {
+        showError(error.message)
+    }
+
 }
 loadCreatures()
 
@@ -51,12 +59,18 @@ async function handleSearch (event){
     if (query === "") {
         return
     }
+    lastAction = () => {handleSearch(event)}
+    showLoading()
     searchBtn.disabled = true
     try {
         const found = await searchCreature(query);
         affichage([found])
     } catch (error) {
-        console.error(error)
+        if (error.message.includes("404") === true) {
+            showEmpty(query);
+        } else {
+            showError(error.message)
+        }
     } finally {
         searchBtn.disabled = false
     }
@@ -86,3 +100,9 @@ async function handleCardClick (event) {
 }
 grid.addEventListener("click", handleCardClick)
 detailClose.addEventListener("click", hideDetails)
+
+grid.addEventListener("click", (event) => {
+    if (event.target.id === "retry-btn" && lastAction !== null){
+        lastAction()
+    }
+} )
