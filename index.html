@@ -43,20 +43,26 @@
     <section aria-label="Recherche et filtres" class="flex flex-col gap-4">
       <div class="flex flex-wrap items-end justify-between gap-4">
         <h1 class="font-display text-4xl font-extrabold">Trouver une créature</h1>
-        <label class="flex w-full max-w-md flex-col gap-1 text-sm font-bold">
-          Rechercher par nom
+        <form id="search-form" action="" class="flex w-full max-w-md flex-col gap-2 items-end">
+          <label class="flex flex-col gap-1 text-sm font-bold">
+            Rechercher par nom
           <input id="search" type="search" placeholder="ex. Mossling" class="field font-normal">
         </label>
+        <div class="flex gap-2">
+          <button id="search-btn" type="submit" class="btn-primary flex-1 disabled:opacity-50 disabled:cursor-not-allowed">Rechercher</button>
+          <button id="clear-btn" type="button" class="btn-outline flex-1">Effacer</button>
+        </div>
+        </form>
       </div>
       <div id="filters" role="group" aria-label="Filtrer par type"
         class="flex flex-nowrap gap-2 lg:overflow-hidden overflow-x-auto">
-        <button type="button" class="chip bg-ink text-white border-ink shrink-0">Tous</button>
-        <button type="button" class="chip shrink-0" id="typeFeu">Feu</button>
-        <button type="button" class="chip shrink-0">Eau</button>
-        <button type="button" class="chip shrink-0">Plante</button>
-        <button type="button" class="chip shrink-0">Électrik</button>
-        <button type="button" class="chip shrink-0">Glace</button>
-        <button type="button" class="chip shrink-0">Ténèbres</button>
+        <button type="button" class="chip shrink-0" data-type="all">Tous</button>
+        <button type="button" class="chip shrink-0" id="typeFeu" data-type="fire">Feu</button>
+        <button type="button" class="chip shrink-0" data-type="water">Eau</button>
+        <button type="button" class="chip shrink-0" data-type="grass">Plante</button>
+        <button type="button" class="chip shrink-0" data-type="electric">Électrik</button>
+        <button type="button" class="chip shrink-0" data-type="ice">Glace</button>
+        <button type="button" class="chip shrink-0" data-type="dark">Ténèbres</button>
       </div>
     </section>
 
@@ -111,9 +117,9 @@
             <div class="grid grid-cols-[80px_1fr_40px] items-center gap-2">
               <span class="font-bold">Défense</span>
               <span class="h-3 rounded-full bg-ground">
-                <span id="detail-defence-bar" class="block h-3 rounded-full bg-brand"></span>
+                <span id="detail-defense-bar" class="block h-3 rounded-full bg-brand"></span>
               </span>
-              <span id="detail-defence-value" class="text-right font-mono">65</span>
+              <span id="detail-defense-value" class="text-right font-mono">65</span>
             </div>
           </div>
           <button id="detail-add" type="button" class="btn-primary">Ajouter à l'équipe</button>
@@ -131,6 +137,7 @@
         </section>
       </aside>
     </div>
+    <button id="chargeBtn" class="btn-primary mx-auto disabled:opacity-50 disabled:cursor-not-allowed">Charger plus</button>
     <!-- ===================== FORMULAIRE DE CRÉATION ===================== -->
     <section id="create" aria-label="Nouvelle créature" class="flex flex-col gap-6 rounded-card bg-white p-8">
       <div>
@@ -202,9 +209,8 @@
     Images : PokeAPI (official artwork). Projet de fans réalisé dans le cadre d'une formation.
   </footer>
 
-  <!-- data.js (à créer) doit être chargé AVANT script.js -->
-  <script src="./data.js"></script>
-  <script src="./script.js"></script>
+
+  <script type="module" src="src/main.js"></script>
 </body>
 
 </html>
